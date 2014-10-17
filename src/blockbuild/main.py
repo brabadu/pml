@@ -20,18 +20,19 @@ app.config.from_object(__name__)
 # def connect_db():
 #     return sqlite3.connect(app.config['DATABASE'])
 
-from blockbuild.blocks import container_node
-from blockbuild.pml.render import render_pml_template
+from blocks import container_node
+from pml.render import render_pml_template
+
 
 @app.route('/')
 def main():
-	template = """
-	<container>
-		<header />
-		<sub_a />
-	</container>
-	"""
-	return render_pml_template(template, 'xml', {}, container_node)
+    template = """
+    <container>
+        <header />
+        <sub_a />
+    </container>
+    """
+    return render_pml_template(template, 'xml', {}, container_node)
 
 
 if __name__ == '__main__':
