@@ -7,8 +7,8 @@ def container():
     return {}
 
 
-@pml_block('all.html', 'sub_a')
-def sub_a():
+@pml_block('all.html', 'content')
+def content():
     return {
         'body': 'very body'
     }
@@ -30,6 +30,6 @@ def editor(page):
 
 container_node = pml_node(container, [
     pml_node(header),
-    pml_node(sub_a),
+    pml_node(content),
     pml_node(editor),
 ])

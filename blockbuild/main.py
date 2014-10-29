@@ -14,9 +14,9 @@ from pml.render import render_pml_template
 TEMPLATE = """
 <container>
     <header />
-    <sub_a />
+    <content />
     <editor />
-</container>"""
+</container>""".strip()
 
 
 @app.route('/', methods=['GET', 'POST'])
