@@ -1,0 +1,35 @@
+{% block container %}
+<html>
+    <head>
+        <title>PML demo</title>
+    </head>
+    <body>
+        <div style="color: #3c78d8">
+            {{ tag_content }}
+        </div>
+    </body>
+</html>
+{% endblock %}
+
+
+{% block header %}
+	<h1>{{ text }}</h1>
+	something here
+{% endblock %}
+
+
+{% block sub_a %}
+	<div>{{ body }}</div>
+{% endblock %}
+
+
+{% block editor %}
+<form method="POST">
+    <div>
+        <textarea name="template" style="width: 400px; height: 200px;">{{ page }}</textarea>
+    </div>
+    <input type="submit" value="Rerender" />
+</form>
+{% endblock %}
+
+

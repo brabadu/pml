@@ -2,26 +2,26 @@ from pml.blocks import pml_block
 from pml.nodes import pml_node
 
 
-@pml_block('container.html', 'container')
+@pml_block('all.html', 'container')
 def container():
     return {}
 
 
-@pml_block('sub_a.html', 'sub_a')
+@pml_block('all.html', 'sub_a')
 def sub_a():
     return {
         'body': 'very body'
     }
 
 
-@pml_block('header.html', 'header')
+@pml_block('all.html', 'header')
 def header():
     return {
         'text': 'Wow. Such header'
     }
 
 
-@pml_block('editor.html', 'editor')
+@pml_block('all.html', 'editor')
 def editor(page):
     return {
         'page': page
