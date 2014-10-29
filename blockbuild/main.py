@@ -16,6 +16,7 @@ TEMPLATE = """
     <header />
     <content />
     <editor />
+    <kittens />
 </container>""".strip()
 
 

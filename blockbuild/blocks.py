@@ -1,3 +1,5 @@
+from random import choice
+
 from pml.blocks import pml_block
 from pml.nodes import pml_node
 
@@ -28,8 +30,18 @@ def editor(page):
     }
 
 
+@pml_block('all.html', 'kittens')
+def kittens(num=5):
+    for i in xrange(int(num)):
+        yield {
+            'x':  choice(range(2, 5)) * 100,
+            'y':  choice(range(2, 5)) * 100,
+        }
+
+
 container_node = pml_node(container, [
     pml_node(header),
     pml_node(content),
     pml_node(editor),
+    pml_node(kittens),
 ])
