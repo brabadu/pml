@@ -13,6 +13,7 @@ def sub_a():
         'body': 'very body'
     }
 
+
 @pml_block('header.html', 'header')
 def header():
     return {
@@ -20,7 +21,15 @@ def header():
     }
 
 
+@pml_block('editor.html', 'editor')
+def editor(page):
+    return {
+        'page': page
+    }
+
+
 container_node = pml_node(container, [
     pml_node(header),
     pml_node(sub_a),
+    pml_node(editor),
 ])

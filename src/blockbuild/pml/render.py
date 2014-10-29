@@ -3,10 +3,6 @@ from inspect import ismodule
 from inspect import getmembers
 from itertools import imap
 
-# from webhelpers.html import literal
-
-literal = lambda x: x
-
 from . import formats
 
 
@@ -44,9 +40,11 @@ def _render_pml(
 
     block = pml_node.block
 
-    partial_block = block.partial(context)
+    wanted_context = block.wanted_context(context)
+    wanted_context.update(attributes)
+
     try:
-        block_context = partial_block.call(**attributes)
+        block_context = block.call(**wanted_context)
     except StopRendering:
         return u''
 
@@ -66,29 +64,14 @@ def _render_pml(
             sub_nodes
         )
         render_context.update(
-            tag_content=literal('').join(
+            tag_content=''.join(
                 rendered_block_content
             ).strip(),
             tag_node=root_node
         )
-        current_block_content.append(partial_block.render(render_context))
+        current_block_content.append(block.render(render_context))
 
-    if partial_block.wrapper is not None:
-        wrapper_context = {}
-        wrapper_context.update(context)
-        wrapper_context.update(
-            partial_block.wrapper.partial(context).call()
-        )
-        wrapper_context.update(
-            tag_content=literal('').join(
-                current_block_content
-            )
-        )
-        result = partial_block.wrapper.render(wrapper_context)
-    else:
-        result = literal('').join(current_block_content)
-
-    return result
+    return ''.join(current_block_content)
 
 
 _formats_processors = dict(getmembers(formats, ismodule))

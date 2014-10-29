@@ -1,5 +1,4 @@
 # all the imports
-import sqlite3
 from flask import Flask, request, session, g, redirect, url_for, \
      abort, render_template, flash
 
@@ -23,16 +22,23 @@ app.config.from_object(__name__)
 from blocks import container_node
 from pml.render import render_pml_template
 
+TEMPLATE = """<container>
+    <header />
+    <sub_a />
+    <editor />
+</container>""".strip()
 
-@app.route('/')
+
+@app.route('/', methods=['GET', 'POST'])
 def main():
-    template = """
-    <container>
-        <header />
-        <sub_a />
-    </container>
-    """
-    return render_pml_template(template, 'xml', {}, container_node)
+    if request.method == 'POST' and request.form.get('template'):
+        template = request.form.get('template')
+    else:
+        template = TEMPLATE
+
+    return render_pml_template(template, 'xml', {
+        'page': template
+    }, container_node)
 
 
 if __name__ == '__main__':
