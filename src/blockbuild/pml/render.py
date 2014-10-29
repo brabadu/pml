@@ -3,6 +3,8 @@ from inspect import ismodule
 from inspect import getmembers
 from itertools import imap
 
+from flask import Markup
+
 from . import formats
 
 
@@ -64,9 +66,9 @@ def _render_pml(
             sub_nodes
         )
         render_context.update(
-            tag_content=''.join(
+            tag_content=Markup(''.join(
                 rendered_block_content
-            ).strip(),
+            ).strip()),
             tag_node=root_node
         )
         current_block_content.append(block.render(render_context))
